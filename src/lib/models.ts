@@ -19,4 +19,12 @@ export type Chair = {
     socials: string;
 }
 
+export type Team ={
+    name: string;
+    image: string;
+    position: string;
+    instagram: string;
+    linkedin: string;
+    description: string;
 
+}
