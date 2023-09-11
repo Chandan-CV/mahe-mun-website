@@ -3,6 +3,7 @@
 	import client from '$lib/sanityclient';
 	import { onMount } from 'svelte';
 	import ShowCommittee from '../../components/ShowCommittee.svelte';
+	import Footer from '../../components/Footer.svelte';
 	/**
 	 * @type {never[]}
 	 */
@@ -39,4 +40,5 @@
 			</div>
 		</section>
 	</div>
+	<Footer/>
 </body>
