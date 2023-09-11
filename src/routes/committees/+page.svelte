@@ -22,7 +22,7 @@
 	<div
 		class="bg-[url('https://images.unsplash.com/photo-1590274853856-f22d5ee3d228?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dW5pdGVkJTIwbmF0aW9uc3xlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=600&q=60')] w-full h-screen bg-contain bg-fixed bg-blend-overlay bg-[#1F6E8C] flex justify-center items-center"
 	>
-		<h1 class="text-9xl text-white">COMMITEES</h1>
+		<h1 class="md:text-9xl text-5xl text-white">COMMITEES</h1>
 	</div>
 	<div class="w-full p-10">
 		<section class="text-gray-600 body-font">
