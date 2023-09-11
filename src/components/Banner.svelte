@@ -1,6 +1,6 @@
 <script>
 	import { onMount } from 'svelte';
-	import ManipalLogo from '../lib/images/MAHE Bengaluru 305x114.svg';
+	import ManipalLogo from '../lib/images/m-removebg-preview.png';
 	import { fade, fly } from 'svelte/transition';
 	import MAHEMUNLogo from '../lib/images/MAHE-MUN-logo-blue.jpeg' 
 	let show = {

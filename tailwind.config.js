@@ -1,5 +1,4 @@
 /** @type {import('tailwindcss').Config} */
-
 export default {
 	// content: ['./src/**/*.{html,js,svelte,ts}'],
 	content: {
@@ -23,6 +22,9 @@ export default {
 				  '100%': { opacity: theme('0') },
 				},
 			  }),
+			  fontFamily: {
+				Nevis: ['Nevis'],
+			  },
 		}
 	},
 	plugins: [
