@@ -1,7 +1,7 @@
 <script>
 	import '../app.css';
 	import logo from '../lib/images/MAHE-MUN-logo-blue.jpeg';
-	import maheLogo from '../lib/images/MAHE Bengaluru 305x114.svg'
+	import maheLogo from '../lib/images/m-removebg-preview.png'
 </script>
 
 <!-- 
@@ -20,7 +20,7 @@
 <header class="text-white body-font sticky">
 	<div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
 		<a class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
-			<img src={maheLogo} alt="MAHE-MUN" width="150" height="150"  class="brightness-0 invert "/>
+			<img src={maheLogo} alt="MAHE-MUN" width="50" height="50"  class="brightness-0 invert "/>
 		</a>
 		<nav class="md:ml-auto md:mr-auto flex flex-wrap items-center text-base justify-center">
 			<a class="mr-5 hover:text-[#84A7A1]">Home</a>
