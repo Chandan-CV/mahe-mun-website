@@ -11,7 +11,7 @@
 	onMount(async () => {
 		console.log('inside the onmount again');
 		const data = await client.fetch(
-			`*[_type =="committees"]{name,   "imageUrl": image.asset->url}`
+			`*[_type =="committees"]{name,   "imageUrl": image.asset->url, description}`
 		);
 		committeedata = data;
 	});
