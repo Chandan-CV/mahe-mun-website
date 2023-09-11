@@ -1,7 +1,7 @@
 <script>
 	import '../app.css';
 	import logo from '../lib/images/MAHE-MUN-logo-blue.jpeg';
-	import maheLogo from '../lib/images/m-removebg-preview.png'
+	import maheLogo from '../lib/images/m-removebg-preview.png';
 </script>
 
 <!-- 
@@ -20,13 +20,13 @@
 <header class="text-white body-font sticky">
 	<div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
 		<a class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
-			<img src={maheLogo} alt="MAHE-MUN" width="50" height="50"  class="brightness-0 invert "/>
+			<img src={maheLogo} alt="MAHE-MUN" width="50" height="50" class="brightness-0 invert" />
 		</a>
 		<nav class="md:ml-auto md:mr-auto flex flex-wrap items-center text-base justify-center">
-			<a class="mr-5 hover:text-[#84A7A1]">Home</a>
-			<a class="mr-5 hover:text-[#84A7A1]">Committees</a>
-			<a class="mr-5 hover:text-[#84A7A1]">Team</a>
-			<a class="mr-5 hover:text-[#84A7A1]">General Resources</a>
+			<a class="mr-5 hover:text-[#84A7A1] cursor-pointer" href="/">Home</a>
+			<a class="mr-5 hover:text-[#84A7A1] cursor-pointer" href="/committees">Committees</a>
+			<a class="mr-5 hover:text-[#84A7A1] cursor-pointer" href="/team">Team</a>
+			<a class="mr-5 hover:text-[#84A7A1] cursor-pointer"href="/generalresources">General Resources</a>
 		</nav>
 		<button
 			class="inline-flex items-center border-0 py-1 px-3 focus:outline-none hover:bg-[#84A7A1] hover:text-black rounded text-base mt-4 md:mt-0"
