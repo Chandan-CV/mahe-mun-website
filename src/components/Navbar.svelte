@@ -23,10 +23,10 @@
 			<img src={maheLogo} alt="MAHE-MUN" width="150" height="150"  class="brightness-0 invert "/>
 		</a>
 		<nav class="md:ml-auto md:mr-auto flex flex-wrap items-center text-base justify-center">
-			<a class="mr-5 hover:text-[#84A7A1]">Home</a>
-			<a class="mr-5 hover:text-[#84A7A1]">Committees</a>
-			<a class="mr-5 hover:text-[#84A7A1]">Team</a>
-			<a class="mr-5 hover:text-[#84A7A1]">General Resources</a>
+			<a class="mr-5 hover:text-[#84A7A1] cursor-pointer">Home</a>
+			<a class="mr-5 hover:text-[#84A7A1] cursor-pointer">Committees</a>
+			<a class="mr-5 hover:text-[#84A7A1] cursor-pointer">Team</a>
+			<a class="mr-5 hover:text-[#84A7A1] cursor-pointer">General Resources</a>
 		</nav>
 		<button
 			class="inline-flex items-center border-0 py-1 px-3 focus:outline-none hover:bg-[#84A7A1] hover:text-black rounded text-base mt-4 md:mt-0"
