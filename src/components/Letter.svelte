@@ -1,5 +1,5 @@
-<section class="px-48 text-white font-sans">
-    <h1 class="title-font sm:text-7xl text-4xl mb-4 font-medium text-white-400 flex justify-center text-center">
+<section class=" px-5 text-center md:px-40 text-white font-sans">
+    <h1 class="title-font sm:text-7xl text-4xl mb-4  text-white-400 flex justify-center text-center font-light">
         LETTER FROM SECRETARY GENERAL
     </h1>
     <p class="flex flex-wrap">

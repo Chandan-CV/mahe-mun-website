@@ -2,7 +2,7 @@
     import Logo from '../lib/images/MAHE-MUN-logo-blue.jpeg';
 </script>
 
-<footer class="text-black-600 body-font bg-[#0E2954]">
+<footer class="text-black-600 body-font bg-[#0E2954] self-baseline w-full bottom-0">
     <div class="container px-5  mx-auto flex items-center sm:flex-row flex-col">
       <a class="flex title-font font-medium items-center md:justify-start justify-center text-black-900">
         <img src ={Logo} alt="mahe logo" width="70" height="70"/>
