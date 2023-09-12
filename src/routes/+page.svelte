@@ -27,11 +27,16 @@
 
 	import Letter from '../components/Letter.svelte';
 	import Footer from '../components/Footer.svelte';
+	import Aboutus from '../components/Aboutus.svelte';
+	import Delegate from '../components/Delegate.svelte';
+	import ContactUs from '../components/ContactUs.svelte';
 </script>
 
 <body class= "bg-gradient-to-b from-[#0E2954] via-[#1F6E8C] to-[#2E8A99] ">
 	<Navbar />
 	<Hero />
-	<Letter />
+	<Aboutus />
+	<Delegate />
+	<ContactUs/>
 	<Footer/>
 </body>
