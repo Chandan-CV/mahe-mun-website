@@ -6,6 +6,7 @@
 	import { page } from '$app/stores';
 	import type { Committee } from '$lib/models';
 	import ShowChairs from '../../../components/ShowChairs.svelte';
+	import Footer from '../../../components/Footer.svelte';
 
 	let committee: Committee;
 	onMount(async () => {
@@ -69,4 +70,5 @@
 			</section>
 		</div>
 	{/if}
+	<Footer/>
 </body>

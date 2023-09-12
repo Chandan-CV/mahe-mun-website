@@ -52,7 +52,7 @@ if(browser){
 		<h1 class="title-font sm:text-8xl text-4xl mb-4 text-center font-medium text-white-900">
 			MAHE-BLR
 		</h1>
-		<h3 class="title-font sm:text-6xl text-3xl mb-4  font-medium text-white-900">
+		<h3 class="title-font sm:text-6xl text-3xl mb-4  font-medium text-white-900 m-2">
 			MODEL UNITED NATIONS
 		</h3>
 		</div>
@@ -63,7 +63,7 @@ if(browser){
 			</p>
 			<div id = "countdownbox" class=" z-9 text-center md:w-200px w-auto md:text-6xl text-2xl mb-9 font-semibold font-mono bg-clip-text text-transparent bg-gradient-to-b from-[#0E2954] via-[#1F6E8C]  to-[#2E8A99] backgroundpan countFadeIn ">
 				{#if !lessthanzero}
-				<div class="flex justify-center align-middle w-auto text-white-100">
+				<div class="px-4 flex justify-center align-middle w-auto text-white-100">
 					<div class="flex-col flex-1 mt-auto mb-auto bg-[#0E2954]  text-white md:px-5 px-2 md:py-5 py-2">
 						{dLeft}
 						<p class="md:text-2xl text-xl font-semibold">Days</p>

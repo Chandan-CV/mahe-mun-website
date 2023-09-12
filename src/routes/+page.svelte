@@ -33,6 +33,5 @@
 	<Navbar />
 	<Hero />
 	<Letter />
-	<h1>Page</h1>
 	<Footer/>
 </body>
