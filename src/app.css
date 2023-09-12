@@ -1,6 +1,21 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+.gr{
+    display: grid;
+    grid-template-columns: 60% 40%;
+}
+@media screen and(max-width: 768px){
+    .gr{
+        display: flex;
+        flex-direction: column; 
+    }
+}
+.gr2{
+    display: grid;
+    grid-template-columns:100%;
+    gap: 1rem;
+}
 
 @font-face {
     font-family:"Nevis" ;
