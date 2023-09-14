@@ -10,6 +10,7 @@
 		 const response = await client.fetch(`*[_type =="team"][0]`)
 		 data = response.team;
 	})
+	var i:number =0;
 </script>
 
 <body class="bg-gradient-to-b from-[#0E2954] via-[#1F6E8C] to-[#2E8A99]">
@@ -24,7 +25,7 @@
 				Meet the people who are active on MAHE MUN Slack channel at 3 am having a deep discussion on the font to be used on the website:)
 				</p>
 			</div>
-			<div class="flex flex-wrap -m-4">
+			<div class="flex flex-wrap justify-center items-center -m-4">
 				{#if data}	
 				{#each data as member }
 				<div class="p-4 lg:w-1/2">
