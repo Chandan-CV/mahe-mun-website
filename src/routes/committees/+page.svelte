@@ -30,11 +30,6 @@
 				<div class="flex flex-wrap -mx-4 -mb-10 text-center">
 					{#each committeedata as committee}
 						<ShowCommittee {committee} />
-						<ShowCommittee {committee} />
-						<ShowCommittee {committee} />
-						<ShowCommittee {committee} />
-						<ShowCommittee {committee} />
-						<ShowCommittee {committee} />
 					{/each}
 				</div>
 			</div>

@@ -19,7 +19,6 @@
 }[0]`);
 		committee = res;
 		console.log(committee);
-		console.log(committee.imageUrl);
 		
 	});
 </script>
@@ -31,9 +30,9 @@
 			id="dynamicBG"
 			class={"bg-[url('https://images.unsplash.com/photo-1536181783029-1097aaf179de?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2072&q=80')] h-screen bg-contain bg-fixed flex justify-center items-center bg-[#0E2954] bg-blend-overlay"}
 		>
-			<p class="text-white text-5xl font-light lg:text-9xl">{committee.name}</p>
+			<p class="text-white text-5xl font-light lg:text-9xl text-center">{committee.name}</p>
 		</div>
-		<div class="p-20 flex justify-center items-center text-center">
+		<div class="p-5 mt-20 md:p-20  flex justify-center items-center text-center">
 			<p class="whitespace-pre-line text-2xl font-light">{committee.description}</p>
 		</div>
 		<div class="w-full p-10 flex justify-center items-center">
@@ -62,6 +61,7 @@
 			<section class="text-gray-600 body-font">
 				<div class="container px-5 py-24 mx-auto ">
 					<div class="flex flex-wrap -m-4 justify-center items-center">
+
 						{#each committee.chairs as chair}
 							<ShowChairs {chair} />
 						{/each}
