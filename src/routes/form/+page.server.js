@@ -15,12 +15,13 @@ export const load = async (event) => {
 	if (!session?.user) {
 		return { loggedIn: false };
 	} else {
-		let foundUser = await munUserInfo.findOne({ user_email: session.user.email });
-		if (foundUser != null) {
-			// can also redirect to dashboard
-			throw redirect(302, '/');
-		} else {
-			return { loggedIn: true, session: session };
-		}
+		// let foundUser = await munUserInfo.findOne({ user_email: session.user.email });
+		// if (foundUser != null) {
+		// 	// can also redirect to dashboard
+		// 	throw redirect(302, '/');
+		// } else {
+		// 	return { loggedIn: true, session: session };
+		// }
+		return { loggedIn: true, session: session };
 	}
 };

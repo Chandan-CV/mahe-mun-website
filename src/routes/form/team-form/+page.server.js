@@ -10,6 +10,7 @@ const client = new MongoClient(cstring);
 const db = client.db(process.env.MONGO_DB_NAME);
 const munUserInfo = db.collection('mun_user_info');
 const munUserPayment = db.collection('mun_user_payments');
+const munTeams = db.collection('mun_teams');
 
 //@ts-ignore
 export const load = async (event) => {
@@ -39,12 +40,23 @@ export const actions = {
 		const symbolKey = Reflect.ownKeys(formData).find((key) => key.toString() === 'Symbol(state)');
 		//@ts-ignore
 		if (formData[symbolKey].length > 0 && formData[symbolKey] != undefined) {
+            let generatedCode;
+            while(true) {
+                generatedCode = Math.floor(100000 + Math.random() * 900000);
+                const foundCode = await munTeams.findOne({ join_code: generatedCode });
+                if(foundCode == null){
+                    break;
+                } else {
+                    continue;
+                }
+            }
+            const teamRefId = uuidv4();
 			//@ts-ignore
 			const actualData = formData[symbolKey];
 			console.log(actualData);
 			munUserInfo.insertOne({
 				user_email: session.user.email,
-				reg_type: "individual",
+                reg_type: "team",
 				first_name: actualData[0]['value'],
 				last_name: actualData[1]['value'],
 				user_age: actualData[2]['value'],
@@ -60,8 +72,19 @@ export const actions = {
 				just_countery: actualData[12]['value'],
 				exp_as_del: actualData[13]['value'],
 				additional_questions: actualData[14]['value'],
+                team_ref_id: teamRefId,    
 				status: 'unconfirmed'
 			});
+
+            munTeams.insertOne({
+                team_name: actualData[16]['value'],
+                team_capacity: actualData[15]['value'],
+                current_capacity: 1,
+                join_code: generatedCode,
+                joinable: true,
+                team_ref_id: teamRefId,
+                status: 'unconfirmed',
+            })
 			// understand how fees work
 			// if team payment add the following fields
 			// team_name, pass_type -> Team, invite_code, team_capacity, current_capacity
@@ -71,7 +94,7 @@ export const actions = {
 				user_email: session.user.email,
 				mobile_number: actualData['mobileNumber'],
 				amount_to_pay: amountToPay * 100,
-				pass_type: 'Individual',
+				pass_type: 'Team Pass',
 				status: 'created',
 				reference_id: uuidv4()
 			});

@@ -1,14 +1,14 @@
 <script>
 	import '../app.css';
 	import maheLogo from '../lib/images/m-removebg-preview.png';
-	import { signIn } from '@auth/sveltekit/client';
+	import { signIn, signOut } from '@auth/sveltekit/client';
 	import { goto } from '$app/navigation';
 
 	//@ts-ignore
 	/**
 	 * @type {{ loggedIn: any; session: { user: { name: any; }; }; }}
 	 */
-	 export let userState;
+	export let userState;
 </script>
 
 <!-- add ways to show the user on which step of registeration he currently is on -->
@@ -32,6 +32,7 @@
 			<button
 				class="inline-flex items-center border-0 p-1 focus:outline-none hover:bg-[#84A7A1] hover:text-black rounded text-base mt-4 md:mt-0"
 				on:click={() => {
+					// signOut();
 					goto('/form');
 				}}
 				>Hi {userState.session.user.name}
@@ -51,8 +52,9 @@
 			<button
 				class="inline-flex items-center border-0 p-1 focus:outline-none hover:bg-[#84A7A1] hover:text-black rounded text-base mt-4 md:mt-0"
 				on:click={() => {
+					// signOut();
 					signIn('google', {
-						callbackUrl: process.env.CALLBACK_URL
+						callbackUrl: '/?loginSuccess'
 					});
 				}}
 				data-sveltekit-preload-data

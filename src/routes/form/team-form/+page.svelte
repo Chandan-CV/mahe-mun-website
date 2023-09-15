@@ -9,9 +9,11 @@
 	let lastName: string = '';
 	//@ts-ignore
 	let userAge: string = null;
+	let numDelegates: string = '';
 	//@ts-ignore
 	let mobileNumber: string = null;
 	let institutionName: string = '';
+    let teamName: string = '';
 	//@ts-ignore
 	let firstPref: string;
 	//@ts-ignore
@@ -37,6 +39,8 @@
 			lastName &&
 			parseInt(userAge) >= 16 &&
 			institutionName &&
+			parseInt(numDelegates) >= 10 &&
+            teamName &&
 			//@ts-ignore
 			firstPref &&
 			//@ts-ignore
@@ -71,6 +75,8 @@
 			formData.set('justCountry', justCountry);
 			formData.set('expAsDel', expAsDel);
 			formData.set('additionalQuestions', additionalQuestions);
+			formData.set('numDelegates', numDelegates);
+            formData.set('teamName', teamName);
 		} else {
 			error = true;
 			document.body.scrollIntoView();
@@ -84,7 +90,7 @@
 <body class="bg-gradient-to-b from-[#0E2954] via-[#1F6E8C] to-[#2E8A99]">
 	<Navbar userState={data} />
 	{#if error}
-		<ErrorBar message="Error Occured" />
+		<ErrorBar message="Please fill all the form fields carefully" />
 	{/if}
 
 	<!-- <div class="flex justify-center items-center w-screen h-screen bg-white"> -->
@@ -119,6 +125,19 @@
 						placeholder="Last Name*"
 						bind:value={lastName}
 					/>
+					<input
+						class="w-full bg-gray-100 text-gray-900 mt-2 p-3 rounded-lg focus:outline-none focus:shadow-outline"
+						type="text"
+						placeholder="Number of Delegates*"
+						bind:value={numDelegates}
+					/>
+					<input
+						class="w-full bg-gray-100 text-gray-900 mt-2 p-3 rounded-lg focus:outline-none focus:shadow-outline"
+						type="text"
+						placeholder="Team Name(used only on the website)*"
+						bind:value={teamName}
+					/>
+
 					<input
 						class="w-full bg-gray-100 text-gray-900 mt-2 p-3 rounded-lg focus:outline-none focus:shadow-outline"
 						type="number"
@@ -249,13 +268,13 @@
 
 			<div class="w-full lg:-mt-96 lg:w-2/6 px-8 py-12 ml-auto bg-blue-900 rounded-2xl">
 				<div class="flex flex-col text-white">
-					<h1 class="font-bold uppercase text-4xl my-4">Fees</h1>
+					<h1 class="font-bold uppercase text-4xl my-4">Fees (Minimum of 10 delegates required)</h1>
 					<p class="text-gray-400">
-						1st round- 1050 Rs.
+						1st round- 1500 Rs. per person
 						<br />
-						2nd round- 1200 Rs.
+						2nd round- 1700 Rs. per person
 						<br />
-						3rd round- 1200 Rs.
+						3rd round- 1900 Rs. per person
 						<br />
 					</p>
 

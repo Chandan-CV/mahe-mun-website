@@ -7,20 +7,18 @@
 	import { onMount } from 'svelte';
 	import { json } from '@sveltejs/kit';
 
-
-	const getData = async()=>{
-	const data =await client.fetch(`*[_type =="homepage"][0]`)
-	return data;
-	}
-
+	const getData = async () => {
+		const data = await client.fetch(`*[_type =="homepage"][0]`);
+		return data;
+	};
 
 	/**
 	 * @type {Promise<any> | never[]}
 	 */
 
-	let foundData =[];
-	onMount(async()=>{
-		console.log("inside onmount");
+	let foundData = [];
+	onMount(async () => {
+		console.log('inside onmount');
 		foundData = await getData();
 		console.log(foundData);
 	});
@@ -34,11 +32,11 @@
 	import ContactUs from '../components/ContactUs.svelte';
 </script>
 
-<body class= "bg-gradient-to-b from-[#0E2954] via-[#1F6E8C] to-[#2E8A99] ">
-	<Navbar userState={data}/>
+<body class="bg-gradient-to-b from-[#0E2954] via-[#1F6E8C] to-[#2E8A99]">
+	<Navbar userState={data} />
 	<Hero />
 	<Aboutus />
 	<Delegate />
-	<ContactUs/>
-	<Footer/>
+	<ContactUs />
+	<Footer />
 </body>

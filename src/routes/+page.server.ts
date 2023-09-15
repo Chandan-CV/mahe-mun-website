@@ -1,3 +1,4 @@
+//@ts-ignore
 import * as dotenv from 'dotenv';
 
 export const load = async (event) => {
