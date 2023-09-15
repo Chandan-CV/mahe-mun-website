@@ -5,7 +5,10 @@
 	import { goto } from '$app/navigation';
 
 	//@ts-ignore
-	export let userState;
+	/**
+	 * @type {{ loggedIn: any; session: { user: { name: any; }; }; }}
+	 */
+	 export let userState;
 </script>
 
 <!-- add ways to show the user on which step of registeration he currently is on -->
