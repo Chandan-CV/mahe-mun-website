@@ -1,34 +1,71 @@
 <script>
 	import '../app.css';
-	import logo from '../lib/images/MAHE-MUN-logo-blue.jpeg';
 	import maheLogo from '../lib/images/m-removebg-preview.png';
+	import { signIn } from '@auth/sveltekit/client';
+	import { goto } from '$app/navigation';
+
+	//@ts-ignore
+	export let userState;
 </script>
 
+<!-- add ways to show the user on which step of registeration he currently is on -->
+<!-- Filling the form, form filled, payment pending, payment completed, dashboard -->
 <header class="text-white body-font sticky flex justify-center items-center">
 	<div class="container flex flex-wrap p-5 flex-col md:flex-row items-center justify-between">
 		<a class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0" href="/">
 			<img src={maheLogo} alt="MAHE-MUN" width="50" height="50" class="brightness-0 invert" />
 		</a>
-		<nav class="flex flex-wrap items-center text-base justify-center md:justify-between md:w-1/2 w-full ">
+		<nav
+			class="flex flex-wrap items-center text-base justify-center md:justify-between md:w-1/2 w-full"
+		>
 			<a class="m-2 hover:text-[#84A7A1] cursor-pointer" href="/">Home</a>
 			<a class="m-2 hover:text-[#84A7A1] cursor-pointer" href="/committees">Committees</a>
 			<a class="m-2 hover:text-[#84A7A1] cursor-pointer" href="/team">Team</a>
-			<a class="m-2 hover:text-[#84A7A1] cursor-pointer"href="/generalresources">General Resources</a>
-		</nav>
-		<button
-			class="inline-flex items-center border-0 p-1 focus:outline-none hover:bg-[#84A7A1] hover:text-black rounded text-base mt-4 md:mt-0 "
-			>Register Now!
-			<svg
-				fill="none"
-				stroke="currentColor"
-				stroke-linecap="round"
-				stroke-linejoin="round"
-				stroke-width="2"
-				class="w-4 h-4 ml-1"
-				viewBox="0 0 24 24"
+			<a class="m-2 hover:text-[#84A7A1] cursor-pointer" href="/generalresources"
+				>General Resources</a
 			>
-				<path d="M5 12h14M12 5l7 7-7 7" />
-			</svg>
-		</button>
+		</nav>
+		{#if userState.loggedIn}
+			<button
+				class="inline-flex items-center border-0 p-1 focus:outline-none hover:bg-[#84A7A1] hover:text-black rounded text-base mt-4 md:mt-0"
+				on:click={() => {
+					goto('/form');
+				}}
+				>Hi {userState.session.user.name}
+				<svg
+					fill="none"
+					stroke="currentColor"
+					stroke-linecap="round"
+					stroke-linejoin="round"
+					stroke-width="2"
+					class="w-4 h-4 ml-1"
+					viewBox="0 0 24 24"
+				>
+					<path d="M5 12h14M12 5l7 7-7 7" />
+				</svg>
+			</button>
+		{:else}
+			<button
+				class="inline-flex items-center border-0 p-1 focus:outline-none hover:bg-[#84A7A1] hover:text-black rounded text-base mt-4 md:mt-0"
+				on:click={() => {
+					signIn('google', {
+						callbackUrl: process.env.CALLBACK_URL
+					});
+				}}
+				data-sveltekit-preload-data
+				>Register Now!
+				<svg
+					fill="none"
+					stroke="currentColor"
+					stroke-linecap="round"
+					stroke-linejoin="round"
+					stroke-width="2"
+					class="w-4 h-4 ml-1"
+					viewBox="0 0 24 24"
+				>
+					<path d="M5 12h14M12 5l7 7-7 7" />
+				</svg>
+			</button>
+		{/if}
 	</div>
 </header>
