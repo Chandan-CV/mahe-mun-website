@@ -21,15 +21,29 @@ const projection = {
 
 //@ts-ignore
 export const load = async (event) => {
+	console.log('something here');
 	const session = await event.locals.getSession();
 	if (!session?.user) {
 		// check for this path and show an error to the user
 		throw redirect(301, '/?auth');
 	}
 
-	const paymentFound = await munUserPayment.findOne({ email_id: session.user.email });
+	const paymentFound = await munUserPayment.findOne({
+		user_email: session.user.email,
+		status: 'created',
+	});
 	if (paymentFound == null) {
-		throw redirect(301, '/?cancelled');
+		console.log('something here no payments found');
+		throw redirect(301, '/?hellothere');
+	}
+	console.log(paymentFound);
+	if (
+		paymentFound['reference_id'] != undefined &&
+		paymentFound['razor_link_id'] != undefined &&
+		paymentFound['razor_url'] != undefined
+	) {
+		console.log('existing payment');
+		return { link: paymentFound['razor_url'] };
 	}
 	//@ts-ignore
 	let generatedRazorLink = await razorpayInstance.paymentLink
@@ -57,10 +71,13 @@ export const load = async (event) => {
 				//@ts-ignore
 				sessionemail: session.user.email
 			},
-			callback_url: process.env.ORIGIN + '/pay/callback/' + paymentFound['reference_id']
+			callback_url: process.env.ORIGIN + '/payment/callback/' + paymentFound['reference_id'],
+			callback_method: 'get'
 		})
-		.catch(() => {
-			throw redirect(302, '/?cancelled');
+		.catch((error) => {
+			console.log(error);
+			console.log('something');
+			throw redirect(302, '/?error');
 		});
 
 	munUserPayment.updateOne(
@@ -77,6 +94,7 @@ export const load = async (event) => {
 			}
 		}
 	);
+	console.log('payment created');
 
 	return { link: generatedRazorLink.short_url };
 };

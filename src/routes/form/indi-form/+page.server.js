@@ -17,12 +17,12 @@ export const load = async (event) => {
 	if (!session?.user) {
 		throw redirect(301, '/?auth');
 	} else {
-		// let foundUser = await munUserInfo.findOne({ user_email: session.user.email });
-		// if (foundUser != null) {
-		// 	throw redirect(302, '/');
-		// } else {
-		// 	return { loggedIn: true, session: session };
-		// }
+		let foundUser = await munUserInfo.findOne({ user_email: session.user.email });
+		if (foundUser != null) {
+			throw redirect(302, '/');
+		} else {
+			return { loggedIn: true, session: session };
+		}
 		return { loggedIn: true, session: session };
 	}
 };
@@ -75,7 +75,7 @@ export const actions = {
 				status: 'created',
 				reference_id: uuidv4()
 			});
-			throw redirect(302, `/pay`);
+			throw redirect(302, `/payment`);
 		} else {
 			console.log('Error occured');
 			// make a ? route to display error to the user;

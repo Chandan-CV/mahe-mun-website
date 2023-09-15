@@ -18,12 +18,12 @@ export const load = async (event) => {
 	if (!session?.user) {
 		throw redirect(301, '/?auth');
 	} else {
-		// let foundUser = await munUserInfo.findOne({ user_email: session.user.email });
-		// if (foundUser != null) {
-		// 	throw redirect(302, '/');
-		// } else {
-		// 	return { loggedIn: true, session: session };
-		// }
+		let foundUser = await munUserInfo.findOne({ user_email: session.user.email });
+		if (foundUser != null) {
+			throw redirect(302, '/');
+		} else {
+			return { loggedIn: true, session: session };
+		}
 		return { loggedIn: true, session: session };
 	}
 };
@@ -40,23 +40,23 @@ export const actions = {
 		const symbolKey = Reflect.ownKeys(formData).find((key) => key.toString() === 'Symbol(state)');
 		//@ts-ignore
 		if (formData[symbolKey].length > 0 && formData[symbolKey] != undefined) {
-            let generatedCode;
-            while(true) {
-                generatedCode = Math.floor(100000 + Math.random() * 900000);
-                const foundCode = await munTeams.findOne({ join_code: generatedCode });
-                if(foundCode == null){
-                    break;
-                } else {
-                    continue;
-                }
-            }
-            const teamRefId = uuidv4();
+			let generatedCode;
+			while (true) {
+				generatedCode = Math.floor(100000 + Math.random() * 900000);
+				const foundCode = await munTeams.findOne({ join_code: generatedCode });
+				if (foundCode == null) {
+					break;
+				} else {
+					continue;
+				}
+			}
+			const teamRefId = uuidv4();
 			//@ts-ignore
 			const actualData = formData[symbolKey];
 			console.log(actualData);
 			munUserInfo.insertOne({
 				user_email: session.user.email,
-                reg_type: "team",
+				reg_type: 'team',
 				first_name: actualData[0]['value'],
 				last_name: actualData[1]['value'],
 				user_age: actualData[2]['value'],
@@ -72,19 +72,20 @@ export const actions = {
 				just_countery: actualData[12]['value'],
 				exp_as_del: actualData[13]['value'],
 				additional_questions: actualData[14]['value'],
-                team_ref_id: teamRefId,    
+				team_ref_id: teamRefId,
+				is_team_leader: true,
 				status: 'unconfirmed'
 			});
-
-            munTeams.insertOne({
-                team_name: actualData[16]['value'],
-                team_capacity: actualData[15]['value'],
-                current_capacity: 1,
-                join_code: generatedCode,
-                joinable: true,
-                team_ref_id: teamRefId,
-                status: 'unconfirmed',
-            })
+			////////////////////////////////////////////////////converting to integer
+			munTeams.insertOne({
+				team_name: actualData[16]['value'],
+				team_capacity: Number(actualData[15]['value']),
+				current_capacity: 1,
+				join_code: generatedCode,
+				joinable: true,
+				team_ref_id: teamRefId,
+				status: 'unconfirmed'
+			});
 			// understand how fees work
 			// if team payment add the following fields
 			// team_name, pass_type -> Team, invite_code, team_capacity, current_capacity
@@ -98,7 +99,7 @@ export const actions = {
 				status: 'created',
 				reference_id: uuidv4()
 			});
-			throw redirect(302, `/pay`);
+			throw redirect(302, `/payment`);
 		} else {
 			console.log('Error occured');
 			// make a ? route to display error to the user;
