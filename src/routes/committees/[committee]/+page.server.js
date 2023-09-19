@@ -4,6 +4,6 @@ export const load = async (event) => {
 	if (!session?.user) {
 		return { loggedIn: false };
 	} else {
-		return { loggedIn: true, session: session };
+		return { loggedIn: true, session: session, link: "/", display: "Hi " + session.user.name};
 	}
 };

@@ -14,8 +14,9 @@ export const load = async (event) => {
 	if (!session?.user) {
 		throw redirect(302, '/');
 	}
-	return { loggedIn: true, session: session };
+	return { loggedIn: true, session: session, link: '/', display: 'Hi ' + session.user.name };
 };
+//@ts-ignore
 export const actions = {
 	checkCode: async (event) => {
 		const session = await event.locals.getSession();

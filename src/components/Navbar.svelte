@@ -6,7 +6,7 @@
 
 	//@ts-ignore
 	/**
-	 * @type {{ loggedIn: any; session: { user: { name: any; }; }; }}
+	 * @type {{ loggedIn: any; session: { user: { name: any; }; }; link: any; display: any;}}
 	 */
 	export let userState;
 </script>
@@ -33,9 +33,9 @@
 				class="inline-flex items-center border-0 p-1 focus:outline-none hover:bg-[#84A7A1] hover:text-black rounded text-base mt-4 md:mt-0"
 				on:click={() => {
 					// signOut();
-					goto('/form');
+					goto(`${userState.link}`);
 				}}
-				>Hi {userState.session.user.name}
+				>{userState.display}
 				<svg
 					fill="none"
 					stroke="currentColor"

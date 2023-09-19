@@ -52,10 +52,10 @@ export const load = async (event) => {
 		const userFound = await munUserInfo.findOne({ user_email: session.user.email });
 		//@ts-ignore
 		if (userFound['reg_type'] == 'team') {
-			munUserInfo.updateOne({ user_email: session.user.email }, { $set: { status: 'confirmed' } });
+			await munUserInfo.updateOne({ user_email: session.user.email }, { $set: { status: 'confirmed' } });
 			//@ts-ignore
 			if (userFound['is_team_leader'] == true) {
-				munTeams.updateOne(
+				await munTeams.updateOne(
 					//@ts-ignore
 					{ team_ref_id: userFound['team_ref_id'] },
 					{ $set: { status: 'confirmed' } }
@@ -63,7 +63,7 @@ export const load = async (event) => {
 			}
 			//@ts-ignore
 		} else if (userFound['reg_type'] == 'individual') {
-			munUserInfo.updateOne({ user_email: session.user.email }, { $set: { status: 'confirmed' } });
+			await munUserInfo.updateOne({ user_email: session.user.email }, { $set: { status: 'confirmed' } });
 		}
 		return { res: 'Payment successfull', redirect: '/dashboard' };
 	}

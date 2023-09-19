@@ -13,7 +13,7 @@
 	//@ts-ignore
 	let mobileNumber: string = null;
 	let institutionName: string = '';
-    let teamName: string = '';
+	let teamName: string = '';
 	//@ts-ignore
 	let firstPref: string;
 	//@ts-ignore
@@ -31,6 +31,7 @@
 	let expAsDel: string = '';
 	let additionalQuestions: string = '';
 	let error: boolean = false;
+	let formErrors = { nameError: [false, ''], userAgeError: [false, ''] };
 	//@ts-ignore
 	function submitForm({ formData }) {
 		//@ts-ignore
@@ -40,7 +41,7 @@
 			parseInt(userAge) >= 16 &&
 			institutionName &&
 			parseInt(numDelegates) >= 10 &&
-            teamName &&
+			teamName &&
 			//@ts-ignore
 			firstPref &&
 			//@ts-ignore
@@ -76,7 +77,7 @@
 			formData.set('expAsDel', expAsDel);
 			formData.set('additionalQuestions', additionalQuestions);
 			formData.set('numDelegates', numDelegates);
-            formData.set('teamName', teamName);
+			formData.set('teamName', teamName);
 		} else {
 			error = true;
 			document.body.scrollIntoView();
@@ -85,6 +86,16 @@
 			}, 5000);
 		}
 	}
+
+	// function validateUserAge() {
+	// 	//@ts-ignore
+	// 	console.log(isNaN(userAge));
+	// 	//@ts-ignore
+	// 	if (!isNaN(userAge)) {
+	// 		console.log('error');
+	// 	} else {
+	// 	}
+	// }
 </script>
 
 <body class="bg-gradient-to-b from-[#0E2954] via-[#1F6E8C] to-[#2E8A99]">
@@ -92,7 +103,6 @@
 	{#if error}
 		<ErrorBar message="Please fill all the form fields carefully" />
 	{/if}
-
 	<!-- <div class="flex justify-center items-center w-screen h-screen bg-white"> -->
 	<!-- COMPONENT CODE -->
 	<form
@@ -137,13 +147,17 @@
 						placeholder="Team Name(used only on the website)*"
 						bind:value={teamName}
 					/>
-
+					<!-- <div class="mb-6"> -->
 					<input
 						class="w-full bg-gray-100 text-gray-900 mt-2 p-3 rounded-lg focus:outline-none focus:shadow-outline"
 						type="number"
 						placeholder="Age*"
 						bind:value={userAge}
 					/>
+					<!-- {#if formErrors.userAgeError[0]}
+						<p class="text-red-500 text-xs italic">{formErrors.userAgeError[1]}</p>
+					{/if} -->
+					<!-- </div> -->
 					<input
 						class="w-full bg-gray-100 text-gray-900 mt-2 p-3 rounded-lg focus:outline-none focus:shadow-outline"
 						type="number"

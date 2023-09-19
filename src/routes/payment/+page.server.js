@@ -15,6 +15,7 @@ const client = new MongoClient(cstring);
 const db = client.db(process.env.MONGO_DB_NAME);
 const munUserInfo = db.collection('mun_user_info');
 const munUserPayment = db.collection('mun_user_payments');
+const munTeams = db.collection('mun_teams');
 const projection = {
 	_id: 0
 };
@@ -30,7 +31,7 @@ export const load = async (event) => {
 
 	const paymentFound = await munUserPayment.findOne({
 		user_email: session.user.email,
-		status: 'created',
+		status: 'created'
 	});
 	if (paymentFound == null) {
 		console.log('something here no payments found');
@@ -43,7 +44,62 @@ export const load = async (event) => {
 		paymentFound['razor_url'] != undefined
 	) {
 		console.log('existing payment');
-		return { link: paymentFound['razor_url'] };
+		let getPaymentInfoRazor = await razorpayInstance.paymentLink.fetch(
+			paymentFound['razor_link_id']
+		);
+		if (getPaymentInfoRazor.status === 'paid') {
+			await munUserPayment.updateOne(
+				{
+					user_email: session.user.email,
+					reference_id: paymentFound['reference_id'],
+					razor_link_id: paymentFound['razor_link_id'],
+					razor_url: paymentFound['razor_url']
+				},
+				{ $set: { status: getPaymentInfoRazor.status } }
+			);
+			let foundUser = await munUserInfo.findOne({
+				user_email: session.user.email
+			});
+			if (foundUser == null) {
+				throw redirect(302, '/?cancelled');
+			} else {
+				if (foundUser['reg_type'] == 'team') {
+					await munUserInfo.updateOne(
+						{ user_email: session.user.email },
+						{ $set: { status: 'confirmed' } }
+					);
+					if (foundUser['is_team_leader'] == true) {
+						await munTeams.updateOne(
+							{
+								team_ref_id: foundUser['team_ref_id']
+							},
+							{ $set: { status: 'confirmed' } }
+						);
+					}
+				} else if (foundUser['reg_type'] == 'individual') {
+					await munUserInfo.updateOne(
+						{ user_email: session.user.email },
+						{ $set: { status: 'confirmed' } }
+					);
+				}
+			}
+			throw redirect(302, '/dashboard');
+		} else if (
+			getPaymentInfoRazor.status == 'expired' ||
+			getPaymentInfoRazor.status == 'cancelled'
+		) {
+			await munUserPayment.updateOne(
+				{
+					user_email: session.user.email,
+					reference_id: paymentFound['reference_id'],
+					razor_link_id: paymentFound['razor_link_id'],
+					razor_url: paymentFound['razor_url']
+				},
+				{ $set: { status: getPaymentInfoRazor.status } }
+			);
+		} else {
+			return { link: getPaymentInfoRazor.short_url };
+		}
 	}
 	//@ts-ignore
 	let generatedRazorLink = await razorpayInstance.paymentLink
@@ -80,7 +136,7 @@ export const load = async (event) => {
 			throw redirect(302, '/?error');
 		});
 
-	munUserPayment.updateOne(
+	await munUserPayment.updateOne(
 		{
 			user_email: session.user.email,
 			user_name: session.user.name,

@@ -34,12 +34,12 @@ export const load = async (event) => {
 	if (foundTeam != null) {
 		if (foundTeam['current_capacity'] < foundTeam['team_capacity']) {
 			if (foundTeam['current_capacity'] + 1 == foundTeam['team_capacity']) {
-				munTeams.updateOne(
+				await munTeams.updateOne(
 					//////////////////////////////////////converting to integer
 					{ join_code: Number(params.slug), joinable: false },
 					{ $set: { current_capacity: foundTeam['current_capacity'] + 1, joinable: false } }
 				);
-				munUserInfo.insertOne({
+				await munUserInfo.insertOne({
 					user_email: session.user.email,
 					name: session.user.name,
 					reg_type: 'team',
@@ -50,7 +50,7 @@ export const load = async (event) => {
 				throw redirect(302, '/dashboard');
 			} else {
 				let newCapacity = foundTeam['current_capacity'] + 1;
-				munTeams.updateOne(
+				await munTeams.updateOne(
 					////////////////////////////////////converting to integer
 					{ join_code: Number(params.slug), joinable: true },
 					{ $set: { current_capacity: newCapacity } }

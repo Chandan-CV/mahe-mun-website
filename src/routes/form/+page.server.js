@@ -13,14 +13,14 @@ const munUserInfo = db.collection('mun_user_info');
 export const load = async (event) => {
 	const session = await event.locals.getSession();
 	if (!session?.user) {
-		return { loggedIn: false };
+		throw redirect(302, '/?auth');
 	} else {
 		let foundUser = await munUserInfo.findOne({ user_email: session.user.email });
 		if (foundUser != null) {
 			// can also redirect to dashboard
 			throw redirect(302, '/');
 		} else {
-			return { loggedIn: true, session: session };
+			return { loggedIn: true, session: session, link:"/", display: "Hi " + session.user.name};
 		}
 		return { loggedIn: true, session: session };
 	}

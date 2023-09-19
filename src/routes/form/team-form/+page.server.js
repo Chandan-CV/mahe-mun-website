@@ -4,6 +4,12 @@ dotenv.config();
 import { MongoClient } from 'mongodb';
 import { v4 as uuidv4 } from 'uuid';
 
+const ROUND1_TEAM = 150000;
+const ROUND2_TEAM = 170000;
+const ROUND3_TEAM = 190000;
+
+const CURRENT_PRICE = ROUND1_TEAM;
+
 const cstring = process.env.MONGO_URL;
 //@ts-ignore
 const client = new MongoClient(cstring);
@@ -22,7 +28,7 @@ export const load = async (event) => {
 		if (foundUser != null) {
 			throw redirect(302, '/');
 		} else {
-			return { loggedIn: true, session: session };
+			return { loggedIn: true, session: session, link: "/", display: "Hi " + session.user.name};
 		}
 		return { loggedIn: true, session: session };
 	}
@@ -53,7 +59,7 @@ export const actions = {
 			const teamRefId = uuidv4();
 			//@ts-ignore
 			const actualData = formData[symbolKey];
-			console.log(actualData);
+			// console.log(actualData);
 			munUserInfo.insertOne({
 				user_email: session.user.email,
 				reg_type: 'team',
@@ -89,12 +95,13 @@ export const actions = {
 			// understand how fees work
 			// if team payment add the following fields
 			// team_name, pass_type -> Team, invite_code, team_capacity, current_capacity
-			let amountToPay = 1;
+			//////////////////////////////////////////////////////converting to integer
+			let amountToPay = CURRENT_PRICE * Number(actualData[15]['value']);
 			munUserPayment.insertOne({
 				user_name: session.user.name,
 				user_email: session.user.email,
 				mobile_number: actualData['mobileNumber'],
-				amount_to_pay: amountToPay * 100,
+				amount_to_pay: amountToPay,
 				pass_type: 'Team Pass',
 				status: 'created',
 				reference_id: uuidv4()

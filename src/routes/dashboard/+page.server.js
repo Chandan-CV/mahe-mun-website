@@ -1,5 +1,6 @@
 import { redirect } from '@sveltejs/kit';
 import { MongoClient } from 'mongodb';
+import { json } from '@sveltejs/kit';
 import * as dotenv from 'dotenv';
 dotenv.config();
 
@@ -17,6 +18,7 @@ const projectionType = {
 	projection: projection
 };
 
+//@ts-ignore
 export const load = async (event) => {
 	const session = await event.locals.getSession();
 	if (!session?.user) {
@@ -42,7 +44,7 @@ export const load = async (event) => {
 			projectionType
 		);
 		if (userFound == null) {
-            console.log("going to home");
+			console.log('going to home');
 			throw redirect(302, '/');
 		}
 		const teamFound = await munTeams.findOne(
@@ -63,7 +65,12 @@ export const load = async (event) => {
 				userInfo: userFound,
 				teamMembers: allTeamMembersArray,
 				teamInfo: teamFound,
-				userState: { loggedIn: true, session: session }
+				userState: {
+					loggedIn: true,
+					session: session,
+					link: '/',
+					display: 'Hi ' + session.user.name
+				}
 			};
 		} else {
 			throw redirect(302, '/');
@@ -82,13 +89,13 @@ export const load = async (event) => {
 		throw redirect(302, '/');
 	}
 
-	console.log(userFound);
+	// console.log(userFound);
 	//@ts-ignore
 	if (userFound['reg_type'] == 'individual') {
 		return {
 			type: 'individual',
 			userInfo: userFound,
-			userState: { loggedIn: true, session: session }
+			userState: { loggedIn: true, session: session, link: '/', display: 'Hi ' + session.user.name }
 		};
 		//@ts-ignore
 	} else if (userFound['reg_type'] == 'team') {
@@ -110,11 +117,44 @@ export const load = async (event) => {
 				userInfo: userFound,
 				teamMembers: allTeamMembersArray,
 				teamInfo: teamFound,
-				userState: { loggedIn: true, session: session }
+				userState: {
+					loggedIn: true,
+					session: session,
+					link: '/',
+					display: 'Hi ' + session.user.name
+				}
 			};
 		} else {
 			throw redirect(302, '/');
 		}
 	}
 	// throw redirect(302, '/');
+};
+
+export const actions = {
+	deleteTeammate: async (event) => {
+		const session = await event.locals.getSession();
+		if (!session?.user) {
+			throw redirect(302, '/');
+		}
+		const formData = await event.request.formData();
+		//@ts-ignore
+		const symbolKey = Reflect.ownKeys(formData).find((key) => key.toString() === 'Symbol(state)');
+		//@ts-ignore
+		if (formData[symbolKey].length > 0 && formData[symbolKey] != undefined) {
+			//@ts-ignore
+			let userToDeleteEmail = formData[symbolKey][0].value;
+			//@ts-ignore
+			let teamCurrentCapacity = Number(formData[symbolKey][2].value);
+			//@ts-ignore
+			let teamRefId = formData[symbolKey][1].value;
+			console.log(teamRefId);
+			console.log(teamCurrentCapacity);
+			munTeams.updateOne(
+				{ team_ref_id: teamRefId },
+				{ $set: { current_capacity: teamCurrentCapacity - 1 } }
+			);
+			munUserInfo.deleteOne({ user_email: userToDeleteEmail });
+		}
+	}
 };
