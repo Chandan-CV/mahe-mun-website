@@ -19,14 +19,14 @@
 			<img src={maheLogo} alt="MAHE-MUN" width="50" height="50" class="brightness-0 invert" />
 		</a>
 		<nav
-			class="flex flex-wrap items-center text-base justify-center md:justify-between md:w-1/2 w-full"
+			class="flex flex-wrap items-center text-base justify-center md:justify-between md:w-1/2 w-full "
 		>
 			<a class="m-2 hover:text-[#84A7A1] cursor-pointer" href="/">Home</a>
 			<a class="m-2 hover:text-[#84A7A1] cursor-pointer" href="/committees">Committees</a>
 			<a class="m-2 hover:text-[#84A7A1] cursor-pointer" href="/team">Team</a>
-			<a class="m-2 hover:text-[#84A7A1] cursor-pointer" href="/generalresources"
+			<!-- <a class="m-2 hover:text-[#84A7A1] cursor-pointer" href="/generalresources"
 				>General Resources</a
-			>
+			> -->
 		</nav>
 		{#if userState.loggedIn}
 			<button
