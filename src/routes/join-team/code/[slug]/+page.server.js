@@ -34,36 +34,33 @@ export const load = async (event) => {
 	if (foundTeam != null) {
 		if (foundTeam['current_capacity'] < foundTeam['team_capacity']) {
 			if (foundTeam['current_capacity'] + 1 == foundTeam['team_capacity']) {
-				await munTeams.updateOne(
-					//////////////////////////////////////converting to integer
-					{ join_code: Number(params.slug), joinable: false },
-					{ $set: { current_capacity: foundTeam['current_capacity'] + 1, joinable: false } }
-				);
-				await munUserInfo.insertOne({
-					user_email: session.user.email,
-					name: session.user.name,
-					reg_type: 'team',
-					status: 'confirmed',
-					is_team_leader: false,
-					team_ref_id: foundTeam['team_ref_id']
-				});
-				throw redirect(302, '/dashboard');
+				if(foundTeam['mahe_team'] == true){
+					throw redirect(302, '/form/join-c-form/true');
+				} else {
+					throw redirect(302, '/form/join-c-form/false');
+				}
+				
 			} else {
 				let newCapacity = foundTeam['current_capacity'] + 1;
-				await munTeams.updateOne(
-					////////////////////////////////////converting to integer
-					{ join_code: Number(params.slug), joinable: true },
-					{ $set: { current_capacity: newCapacity } }
-				);
-				munUserInfo.insertOne({
-					user_email: session.user.email,
-					name: session.user.name,
-					reg_type: 'team',
-					status: 'confirmed',
-					is_team_leader: false,
-					team_ref_id: foundTeam['team_ref_id']
-				});
-				throw redirect(302, '/dashboard');
+				// await munTeams.updateOne(
+				// 	////////////////////////////////////converting to integer
+				// 	{ join_code: Number(params.slug), joinable: true },
+				// 	{ $set: { current_capacity: newCapacity } }
+				// );
+				// munUserInfo.insertOne({
+				// 	user_email: session.user.email,
+				// 	name: session.user.name,
+				// 	reg_type: 'team',
+				// 	status: 'confirmed',
+				// 	is_team_leader: false,
+				// 	team_ref_id: foundTeam['team_ref_id']
+				// });
+				if(foundTeam['mahe_team'] == true){
+					throw redirect(302, '/form/join-c-form/true');
+				} else {
+					throw redirect(302, '/form/join-c-form/false');
+				}
+				// throw redirect(302, '/dashboard');
 			}
 		} else {
 			throw redirect(302, '/?teamFull');
