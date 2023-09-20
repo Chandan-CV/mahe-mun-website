@@ -29,7 +29,7 @@ export const load = async (event) => {
 		} else {
 			return { loggedIn: true, session: session, link: '/', display: 'Hi ' + session.user.name };
 		}
-		return { loggedIn: true, session: session };
+		// return { loggedIn: true, session: session, link: '/', display: "Hi " + session.user.name};
 	}
 };
 
