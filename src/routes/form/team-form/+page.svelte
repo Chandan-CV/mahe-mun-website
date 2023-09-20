@@ -66,7 +66,8 @@
 			topPortPref.length > 2 &&
 			justCountry.length > 2 &&
 			expAsDel.length > 2 &&
-			additionalQuestions.length > 2
+			additionalQuestions.length > 2 &&
+			!Object.values(formErrors)[1].includes(true)
 		) {
 			if (firstPref === secondPref || secondPref === thirdPref || firstPref === thirdPref) {
 				formErrors['selectionError'] = [true, ''];
@@ -98,6 +99,9 @@
 			formData.set('additionalQuestions', additionalQuestions);
 			formData.set('numDelegates', numDelegates);
 			formData.set('teamName', teamName);
+			if(showLearnerId){
+				formData.set('learnerId', manipalLearnerId);
+			}
 		} else {
 			error = true;
 			document.body.scrollIntoView();
@@ -140,10 +144,8 @@
 	}
 
 	function validateManipalLearnerId() {
-		if (
-			!manipalLearnerId.match(/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/) ||
-			!manipalLearnerId.includes('learner.manipal.edu')
-		) {
+		if (!manipalLearnerId.includes('learner.manipal.edu')) {
+			console.log('Validated');
 			formErrors['manipalLearnerError'] = [true, 'Enter a valid email id'];
 		} else {
 			formErrors['manipalLearnerError'] = [false, ''];
@@ -185,7 +187,27 @@
 					<span
 						class="inline-flex px-4 py-1 text-sm font-semibold leading-5 tracking-wide uppercase rounded-full dark:text-white"
 					>
-						Registeration Fees
+						Registeration Fees (MAHE)
+					</span>
+				</div>
+				<div class="flex justify-center mt-4 text-6xl font-extrabold leading-none dark:text-white">
+					<span class="ml-1 mr-3 text-xl font-medium leading-8 text-gray-500 dark:text-gray-400">
+						Round 1
+					</span>
+					₹1050
+					<span class="pt-8 ml-1 text-2xl font-medium leading-8 text-gray-500 dark:text-gray-400">
+						/Delegate
+					</span>
+				</div>
+			</div>
+			<div
+				class="px-6 py-8 bg-white dark:bg-gray-800 sm:p-10 sm:pb-6 bg-blue-900 md:col-span-4 p-10 text-white w-full p-8 my-4 md:px-12 lg:w-9/12 lg:pl-20 lg:pr-40 mr-auto rounded-2xl shadow-2x"
+			>
+				<div class="flex justify-center">
+					<span
+						class="inline-flex px-4 py-1 text-sm font-semibold leading-5 tracking-wide uppercase rounded-full dark:text-white"
+					>
+						Registeration Fees (NON-MAHE)
 					</span>
 				</div>
 				<div class="flex justify-center mt-4 text-6xl font-extrabold leading-none dark:text-white">
@@ -259,7 +281,9 @@
 						</g>
 					</svg>
 					<span
-						>Deputy Secretary General <span class="text-sm leading-normal font-extrabold tracking-tight">Eshan:</span>&nbsp;</span
+						>Deputy Secretary General <span
+							class="text-sm leading-normal font-extrabold tracking-tight">Eshan:</span
+						>&nbsp;</span
 					>
 					<span class="text-sm">+93 6302 504 562</span>
 				</div>
@@ -315,7 +339,9 @@
 						</g>
 					</svg>
 					<span
-						>Under-Secretary General (USG) Delegate Affairs <span class="text-sm leading-normal font-extrabold tracking-tight">Aayush</span>:&nbsp;</span
+						>Under-Secretary General (USG) Delegate Affairs <span
+							class="text-sm leading-normal font-extrabold tracking-tight">Aayush</span
+						>:&nbsp;</span
 					>
 					<br />
 					<span class="text-sm">+93 9099 060 271</span>
@@ -372,12 +398,13 @@
 						</g>
 					</svg>
 					<span
-						>Under-Secretary General (USG) Delegate Affairs <span class="text-sm leading-normal font-extrabold tracking-tight">Divya</span>:&nbsp;</span
+						>Under-Secretary General (USG) Delegate Affairs <span
+							class="text-sm leading-normal font-extrabold tracking-tight">Divya</span
+						>:&nbsp;</span
 					>
 					<span class="text-sm">+91 6385 129 850</span>
 				</div>
 			</div>
-
 
 			<div
 				class="w-full p-8 my-4 md:px-12 lg:w-9/12 lg:pl-20 lg:pr-40 mr-auto rounded-2xl shadow-2xl"
@@ -416,119 +443,53 @@
 						</select>
 					</div>
 					{#if showLearnerId}
-						<div class="mb-2">
-							<label
-								for="helper-text"
-								class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-								>Manipal Learner ID*</label
-							>
-							<input
-								type="email"
-								id="helper-text"
-								aria-describedby="helper-text-explanation"
-								class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-								placeholder="Manipal Learner ID"
-								bind:value={manipalLearnerId}
-								on:input={validateManipalLearnerId}
-							/>
-						</div>
+						<InputField
+							placeholderName="Manipal Learner ID"
+							labelName="Manipal Learner ID"
+							errorText={formErrors.manipalLearnerError[1].toString()}
+							bind:value={manipalLearnerId}
+							on:input={validateManipalLearnerId}
+						/>
 					{/if}
-					<div class="mb-2">
-						<label
-							for="helper-text"
-							class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-							>Number Of Delegates*</label
-						>
-						<input
-							type="number"
-							id="helper-text"
-							aria-describedby="helper-text-explanation"
-							class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-							placeholder="Number Of Delegates"
-							bind:value={numDelegates}
-							on:input={validateNumberOfDel}
-						/>
-						{#if formErrors.numDelError[0]}
-							<p id="helper-text-explanation" class="mt-2 text-sm text-gray-500 dark:text-gray-400">
-								{formErrors.numDelError[1]}
-							</p>
-						{/if}
-					</div>
-					<div class="mb-2">
-						<label
-							for="helper-text"
-							class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Team Name*</label
-						>
-						<input
-							type="text"
-							id="helper-text"
-							aria-describedby="helper-text-explanation"
-							class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-							placeholder="Team Name(used only for the website)"
-							bind:value={teamName}
-						/>
-					</div>
-					<div class="mb-2">
-						<label
-							for="helper-text"
-							class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Age*</label
-						>
-						<input
-							type="number"
-							id="helper-text"
-							aria-describedby="helper-text-explanation"
-							class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-							placeholder="Age"
-							bind:value={userAge}
-							on:input={validateUserAge}
-						/>
-						{#if formErrors.userAgeError[0]}
-							<p id="helper-text-explanation" class="mt-2 text-sm text-gray-500 dark:text-gray-400">
-								{formErrors.userAgeError[1]}
-							</p>{/if}
-					</div>
+					<InputField
+						placeholderName="Number of Delegates"
+						labelName="Number of Delegates"
+						errorText={formErrors.numDelError[1].toString()}
+						bind:value={numDelegates}
+						on:input={validateNumberOfDel}
+					/>
+					<InputField
+						placeholderName="Team Name(used only for the website)"
+						labelName="Team Name"
+						errorText=" "
+						bind:value={teamName}
+					/>
+					<InputField
+						placeholderName="Age"
+						labelName="Age"
+						errorText=" "
+						bind:value={userAge}
+						on:input={validateUserAge}
+					/>
 					<!-- <div class="mb-6"> -->
 
 					<!-- {#if formErrors.userAgeError[0]}
 						<p class="text-red-500 text-xs italic">{formErrors.userAgeError[1]}</p>
 					{/if} -->
 					<!-- </div> -->
-					<div class="mb-2">
-						<label
-							for="helper-text"
-							class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-							>Whatsapp Number*</label
-						>
-						<input
-							type="tel"
-							id="helper-text"
-							aria-describedby="helper-text-explanation"
-							class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-							placeholder="Whatsapp Number"
-							bind:value={mobileNumber}
-							on:input={validateMobileNumber}
-						/>
-						{#if formErrors.mobileNumError[0]}
-							<p id="helper-text-explanation" class="mt-2 text-sm text-gray-500 dark:text-gray-400">
-								{formErrors.mobileNumError[1]}
-							</p>
-						{/if}
-					</div>
-					<div class="mb-2">
-						<label
-							for="helper-text"
-							class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-							>Institution Name*</label
-						>
-						<input
-							type="text"
-							id="helper-text"
-							aria-describedby="helper-text-explanation"
-							class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-							placeholder="Institution Name"
-							bind:value={institutionName}
-						/>
-					</div>
+					<InputField
+						placeholderName="Whatsapp Number"
+						labelName="Whatsapp Number"
+						errorText={formErrors.mobileNumError[1].toString()}
+						bind:value={mobileNumber}
+						on:input={validateMobileNumber}
+					/>
+					<InputField
+						placeholderName="Institution Name"
+						labelName="Institution Name"
+						bind:value={institutionName}
+						errorText=" "
+					/>
 					<div class="mb-2">
 						<label
 							for="helper-text"
