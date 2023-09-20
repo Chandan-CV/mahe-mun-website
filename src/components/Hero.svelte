@@ -40,28 +40,38 @@ if(browser){
     }
 </script>
 
-<section class="text-gray-600 body-font bg-[#0E2954] bg-banner-bg bg-blend-overlay bg-cover bg-fixed ">
-	<div class="container mx-auto flex items-center justify-center flex-col">
-		<div class="container mx-auto flex items-center justify-center flex-col">
-		<img
-			class="lg:w-2/6 md:w-3/6 w-5/6 object-cover object-center rounded opacity-30 z-1"
+<section class=" body-font md:h-[100vh] bg-[#0E2954] bg-banner-bg bg-blend-overlay bg-cover bg-fixed  "> <!--bg-[#0E2954] bg-banner-bg bg-blend-overlay bg-cover bg-fixed -->
+	<div class="container mx-auto flex flex-1 items-center justify-center flex-col">
+		<div class="container mx-auto flex items-center justify-center flex-col text-white gap-4">
+		
+			<p class="mb-4 Lemonmilk mt-4 align-middle text-center leading-relaxed sm:text-[32px] text-2xl">
+				Welcome To First Edition of
+			</p>
+		<div class="MUNbgHero flex flex-col " >
+			<!-- <img
+			class="lg:w-2/6 md:w-3/6 w-5/6 object-cover object-center rounded opacity-30 -z-1"
 			alt="hero"
 			src={beafk}
-		/>
-		<div class=" absolute text-white flex-col justify-center align-middle">
-		<h1 class="title-font sm:text-8xl text-4xl mb-4 text-center font-medium text-white-900">
-			MAHE-BLR
+		/> -->
+		<h1 class="title-font Nevis sm:text-9xl text-4xl mb-4 text-center font-medium text-white-900">
+			MAHE - BLR
 		</h1>
-		<h3 class="title-font sm:text-6xl text-3xl mb-4  font-medium text-white-900 m-2">
+		
+		<h3 class="title-font Nevis sm:text-[84px] text-2xl text-center align-middle mb-4 font-medium text-white-900 m-2">
 			MODEL UNITED NATIONS
 		</h3>
 		</div>
+		<h3 class="title-font Lemonmilk2 sm:text-[64px] text-2xl text-center align-middle mb-8 font-medium text-white-900 m-2">
+			PEACE POWER PROGRESS
+		</h3>
+		<h3 class="title-font Lemonmilk2 sm:text-[48px] text-2xl text-center align-middle mb-4 font-medium text-white-900 m-2">
+			7<sup>th</sup> and 8<sup>th</sup> October 2022
+		</h3>
+
 		</div>
-		<div class="text-center lg:w-2/3 w-full  text-white font-{Nevis}">
-			<p class="mb-8 mt-14 leading-relaxed sm:text-4xl text-2xl">
-				Join Us for For 1st Ever Edition of MAHE-BLR MUN
-			</p>
-			<div id = "countdownbox" class=" z-9 text-center md:w-200px w-auto md:text-6xl text-2xl mb-9 font-semibold font-mono bg-clip-text text-transparent bg-gradient-to-b from-[#0E2954] via-[#1F6E8C]  to-[#2E8A99] backgroundpan countFadeIn ">
+		<div class="text-center lg:w-2/3 w-full my-1 mt-8  text-white font-{Nevis}">
+			
+			<div id = "countdownbox" class=" text-center md:w-200px w-auto md:text-6xl text-2xl mb-9 font-semibold font-mono bg-clip-text text-transparent bg-gradient-to-b from-[#0E2954] via-[#1F6E8C]  to-[#2E8A99] backgroundpan countFadeIn ">
 				{#if !lessthanzero}
 				<div class="px-4 flex justify-center align-middle w-auto text-white-100">
 					<div class="flex-col flex-1 mt-auto mb-auto bg-[#0E2954]  text-white md:px-5 px-2 md:py-5 py-2">

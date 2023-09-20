@@ -1,14 +1,15 @@
-<section class="p-4 flex justify-center flex-col items-center">
-    <h1 class="flex text-white md:text-5xl text-3xl mb-7 font-light text-center">About Us</h1>
-    <div class="grid md:grid-cols-[60%_40%] grid-cols-1 gap-5 md:p-10">
-    <p class="flex flex-wrap text-white md:text-2xl text-xl text-center font-extralight">
-        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Alias, inventore! Blanditiis omnis recusandae doloremque ipsum facere delectus tempora quis aperiam quia eius, aspernatur nemo eos. Officia explicabo voluptatibus harum quae?
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Corporis ducimus quisquam recusandae eum quia sint provident at, similique quibusdam, alias ad veritatis consequuntur odio et veniam quod unde? Maiores, unde.
+<script>
+    import abstract from '../lib/images/5_COMMITTEES_300+DELEGATES-removebg.png';
+</script>
+<section class="p-4 flex justify-center flex-col items-center bg-gradient-to-b from-[#2E8A99] md:h-[100vh]  to-[#84A7A1]">
+    <p class="flex h-auto text-white md:text-[96px] text-3xl mt-7 mb-7 Nevis text-center">ABOUT MAHE-MUN</p> 
+    <p class="flex Lemonmilk2 flex-wrap mt-7 w-[80%] text-white md:text-[24px] text-xl text-left font-extralight">
+        Manipal Academy of Higher Education is here with the inaugural edition of MAHE MUN to create a legacy of its own by making an elegant entry into the world of conferences with uncountable exciting elements. MAHE MUN is going to be the ideal conjunction of spirited debates with global & analytical perspectives, teachable moments, fun interactions and delegates from around the world. With professionals of immense experience in the sphere of MUNs, we also give the participants an important learning opportunity to merge the multitude of opinions they come across in the eventful two days of the conference. 
+This will truly be a one-of-a-kind experience with a formal conference, a DJ, amazing food and countless other fun activities at a breathtaking campus: a combination that perhaps has never been encountered before. 
+Mark your calendars, 7th and 8th October. We look forward to hosting you!
     </p>
     <!-- svelte-ignore a11y-img-redundant-alt -->
-        <div class="flex justify-center align-middle">
-            <img src="https://source.unsplash.com/random/400x200" class="w-[100%]" alt="random image" />
-    
-        </div>
-    </div>
+    <!-- absolute position and z-index to make it appear behind the text image and make center of image to appear at the top corner of page-->
+    <img src={abstract} alt="abstract" class="absolute opacity-20 md:translate-x-[-95%]"/>
+    <img src={abstract} alt="abstract" class="absolute opacity-20 md:translate-x-[100%]"/>
 </section>
