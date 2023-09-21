@@ -4,6 +4,7 @@
 	import Navbar from '../../components/Navbar.svelte';
 	import client, { urlfor } from '$lib/sanityclient';
 	import type { Team } from '$lib/models';
+	import Teamcomponent from '../../components/Teamcomponent.svelte';
 
 	let teamData: Team[];
 	onMount(async () => {
@@ -29,29 +30,14 @@
 					on the font to be used on the website:)
 				</p>
 			</div>
-			<div class="flex flex-wrap justify-center items-center -m-4">
-				{#if teamData}
-					{#each teamData as member}
-						<div class="p-4 lg:w-1/2">
-							<div
-								class="h-full flex sm:flex-row flex-col items-center sm:justify-start justify-center text-center sm:text-left"
-							>
-								<img
-									alt="team"
-									class="flex-shrink-0 rounded-lg w-48 h-48 object-cover object-center sm:mb-0 mb-4"
-									src={urlfor(member.image).url()}
-								/>
-								<div class="flex-grow sm:pl-8">
-									<h2 class="title-font font-medium text-lg text-black-900">{member.name}</h2>
-									<h3 class="text-black-500 mb-3">{member.position}</h3>
-									<p class="mb-4">
-										{member.description}
-									</p>
-								</div>
-							</div>
-						</div>
-					{/each}
-				{/if}
+			<div class="flex flex-wrap justify-center items-center -m-4 w-full">
+				<div class="flex flex-wrap m-4 w-full justify-center items-center">
+					{#if teamData}
+						{#each teamData as member}
+							<Teamcomponent data={member} />
+						{/each}
+					{/if}
+				</div>
 			</div>
 		</div>
 	</section>
