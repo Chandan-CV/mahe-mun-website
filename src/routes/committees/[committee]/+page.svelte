@@ -19,13 +19,12 @@
 }[0]`);
 		committee = res;
 		console.log(committee);
-		
 	});
 	export let data;
 </script>
 
 <body class="bg-gradient-to-b from-[#0E2954] via-[#1F6E8C] to-[#2E8A99] min-h-screen">
-	<Navbar userState="{data}"/>
+	<Navbar userState={data} />
 	{#if committee}
 		<div
 			id="dynamicBG"
@@ -33,8 +32,12 @@
 		>
 			<p class="text-white text-5xl font-light lg:text-9xl text-center">{committee.name}</p>
 		</div>
-		<div class="p-5 mt-20 md:p-20  flex justify-center items-center text-center">
-			<p class="whitespace-pre-line text-2xl font-light">{committee.description}</p>
+		<div class="p-5 mt-20 md:p-20 flex justify-center items-center text-center">
+			<p class="whitespace-pre-line text-2xl font-light leading-relaxed">{committee.description}</p>
+		</div>
+		<div class="flex flex-col justify-center items-center p-10">
+			<h1 class="mb-10 text-5xl font-light text-black">Agenda</h1>
+			<p class="text-2xl leading-relaxed font-light">{committee.agenda}</p>
 		</div>
 		<div class="w-full p-10 flex justify-center items-center">
 			<button
@@ -60,9 +63,8 @@
 		<div>
 			<p class="text-3xl font-light text-center mb-20">Committee Chairs</p>
 			<section class="text-gray-600 body-font">
-				<div class="container px-5 py-24 mx-auto ">
+				<div class="container px-5 py-24 mx-auto">
 					<div class="flex flex-wrap -m-4 justify-center items-center">
-
 						{#each committee.chairs as chair}
 							<ShowChairs {chair} />
 						{/each}
@@ -71,5 +73,5 @@
 			</section>
 		</div>
 	{/if}
-	<Footer/>
+	<Footer />
 </body>
