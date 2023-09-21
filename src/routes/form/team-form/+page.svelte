@@ -4,6 +4,7 @@
 	import ErrorBar from '../../../components/ErrorBar.svelte';
 	import { enhance } from '$app/forms';
 	import InputField from '../../../components/InputField.svelte';
+	import RegisterationContact from '../../../components/RegisterationContact.svelte';
 	// add headings
 	// move info to the top
 	export let data;
@@ -281,9 +282,7 @@
 						</g>
 					</svg>
 					<span
-						>Deputy Secretary General <span
-							class="text-sm leading-normal font-extrabold tracking-tight">Eshan:</span
-						>&nbsp;</span
+						>Deputy Secretary General <span class="text-sm leading-normal font-extrabold tracking-tight">Eshan:</span>&nbsp;</span
 					>
 					<span class="text-sm">+93 6302 504 562</span>
 				</div>
@@ -339,9 +338,7 @@
 						</g>
 					</svg>
 					<span
-						>Under-Secretary General (USG) Delegate Affairs <span
-							class="text-sm leading-normal font-extrabold tracking-tight">Aayush</span
-						>:&nbsp;</span
+						>Under-Secretary General (USG) Delegate Affairs <span class="text-sm leading-normal font-extrabold tracking-tight">Aayush</span>:&nbsp;</span
 					>
 					<br />
 					<span class="text-sm">+93 9099 060 271</span>
@@ -398,13 +395,12 @@
 						</g>
 					</svg>
 					<span
-						>Under-Secretary General (USG) Delegate Affairs <span
-							class="text-sm leading-normal font-extrabold tracking-tight">Divya</span
-						>:&nbsp;</span
+						>Under-Secretary General (USG) Delegate Affairs <span class="text-sm leading-normal font-extrabold tracking-tight">Divya</span>:&nbsp;</span
 					>
 					<span class="text-sm">+91 6385 129 850</span>
 				</div>
 			</div>
+
 
 			<div
 				class="w-full p-8 my-4 md:px-12 lg:w-9/12 lg:pl-20 lg:pr-40 mr-auto rounded-2xl shadow-2xl"

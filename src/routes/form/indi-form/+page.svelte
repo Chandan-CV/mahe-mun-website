@@ -4,6 +4,7 @@
 	import ErrorBar from '../../../components/ErrorBar.svelte';
 	import InputField from '../../../components/InputField.svelte';
 	import { enhance } from '$app/forms';
+	import RegisterationContact from '../../../components/RegisterationContact.svelte';
 
 	export let data;
 	let firstName: string = '';
@@ -43,6 +44,7 @@
 	};
 	//@ts-ignore
 	function submitForm({ formData }) {
+		console.log(!Object.values(formErrors)[0].includes(true));
 		//@ts-ignore
 		if (
 			firstName &&
@@ -92,9 +94,6 @@
 			formData.set('justCountry', justCountry);
 			formData.set('expAsDel', expAsDel);
 			formData.set('additionalQuestions', additionalQuestions);
-			if(showLearnerId){
-				formData.set('learnerId', manipalLearnerId);
-			}
 		} else {
 			error = true;
 			document.body.scrollIntoView();
@@ -264,9 +263,7 @@
 						</g>
 					</svg>
 					<span
-						>Deputy Secretary General <span
-							class="text-sm leading-normal font-extrabold tracking-tight">Eshan:</span
-						>&nbsp;</span
+						>Deputy Secretary General <span class="text-sm leading-normal font-extrabold tracking-tight">Eshan:</span>&nbsp;</span
 					>
 					<span class="text-sm">+93 6302 504 562</span>
 				</div>
@@ -322,9 +319,7 @@
 						</g>
 					</svg>
 					<span
-						>Under-Secretary General (USG) Delegate Affairs <span
-							class="text-sm leading-normal font-extrabold tracking-tight">Aayush</span
-						>:&nbsp;</span
+						>Under-Secretary General (USG) Delegate Affairs <span class="text-sm leading-normal font-extrabold tracking-tight">Aayush</span>:&nbsp;</span
 					>
 					<br />
 					<span class="text-sm">+93 9099 060 271</span>
@@ -381,9 +376,7 @@
 						</g>
 					</svg>
 					<span
-						>Under-Secretary General (USG) Delegate Affairs <span
-							class="text-sm leading-normal font-extrabold tracking-tight">Divya</span
-						>:&nbsp;</span
+						>Under-Secretary General (USG) Delegate Affairs <span class="text-sm leading-normal font-extrabold tracking-tight">Divya</span>:&nbsp;</span
 					>
 					<span class="text-sm">+91 6385 129 850</span>
 				</div>

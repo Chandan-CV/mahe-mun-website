@@ -22,18 +22,18 @@ const munTeams = db.collection('mun_teams');
 
 //@ts-ignore
 export const load = async (event) => {
-	// const session = await event.locals.getSession();
-	// if (!session?.user) {
-	// 	throw redirect(301, '/?auth');
-	// } else {
-	// 	let foundUser = await munUserInfo.findOne({ user_email: session.user.email });
-	// 	if (foundUser != null) {
-	// 		throw redirect(302, '/');
-	// 	} else {
-	// 		return { loggedIn: true, session: session, link: "/", display: "Hi " + session.user.name};
-	// 	}
-	return { loggedIn: true, session: {}, link: "/", display: "Hi " + "Return to normal" };
-	// }
+	const session = await event.locals.getSession();
+	if (!session?.user) {
+		throw redirect(301, '/?auth');
+	} else {
+		let foundUser = await munUserInfo.findOne({ user_email: session.user.email });
+		if (foundUser != null) {
+			throw redirect(302, '/');
+		} else {
+			return { loggedIn: true, session: session, link: "/", display: "Hi " + session.user.name};
+		}
+	// return { loggedIn: true, session: {}, link: "/", display: "Hi " + "Return to normal" };
+	}
 };
 
 export const actions = {
