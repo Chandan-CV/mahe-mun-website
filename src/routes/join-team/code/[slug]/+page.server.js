@@ -11,6 +11,7 @@ const munUserInfo = db.collection('mun_user_info');
 const munUserPayment = db.collection('mun_user_payments');
 const munTeams = db.collection('mun_teams');
 
+//@ts-ignore
 export const load = async (event) => {
 	const session = await event.locals.getSession();
 	if (!session?.user) {
@@ -20,12 +21,12 @@ export const load = async (event) => {
 	if (!params.slug) {
 		throw redirect(302, '/');
 	}
-    let foundTeam;
+	let foundTeam;
 	try {
 		foundTeam = await munTeams.findOne({
 			join_code: parseInt(params.slug),
 			joinable: true,
-			status: 'confirmed',
+			status: 'confirmed'
 		});
 	} catch (err) {
 		throw redirect(302, '/?invalidCode');
@@ -33,31 +34,33 @@ export const load = async (event) => {
 	if (foundTeam != null) {
 		if (foundTeam['current_capacity'] < foundTeam['team_capacity']) {
 			if (foundTeam['current_capacity'] + 1 == foundTeam['team_capacity']) {
-				munTeams.updateOne(
-					{ join_code: params.slug, joinable: true },
-					{ $set: { current_capacity: foundTeam['current_capacity'] + 1, joinable: false } }
-				);
-				munUserInfo.insertOne({
-					user_email: session.user.email,
-					name: session.user.name,
-					reg_type: 'team',
-					status: 'confirmed',
-					team_ref_id: foundTeam['team_ref_id']
-				});
-				throw redirect(302, '/dashboard');
+				if(foundTeam['mahe_team'] == true){
+					throw redirect(302, '/form/join-c-form/true');
+				} else {
+					throw redirect(302, '/form/join-c-form/false');
+				}
+				
 			} else {
-				munTeams.updateOne(
-					{ join_code: params.slug, joinable: true },
-					{ $set: { current_capacity: foundTeam['current_capacity'] + 1 } }
-				);
-				munUserInfo.insertOne({
-					user_email: session.user.email,
-					name: session.user.name,
-					reg_type: 'team',
-					status: 'confirmed',
-					team_ref_id: foundTeam['team_ref_id']
-				});
-				throw redirect(302, '/dashboard');
+				let newCapacity = foundTeam['current_capacity'] + 1;
+				// await munTeams.updateOne(
+				// 	////////////////////////////////////converting to integer
+				// 	{ join_code: Number(params.slug), joinable: true },
+				// 	{ $set: { current_capacity: newCapacity } }
+				// );
+				// munUserInfo.insertOne({
+				// 	user_email: session.user.email,
+				// 	name: session.user.name,
+				// 	reg_type: 'team',
+				// 	status: 'confirmed',
+				// 	is_team_leader: false,
+				// 	team_ref_id: foundTeam['team_ref_id']
+				// });
+				if(foundTeam['mahe_team'] == true){
+					throw redirect(302, '/form/join-c-form/true');
+				} else {
+					throw redirect(302, '/form/join-c-form/false');
+				}
+				// throw redirect(302, '/dashboard');
 			}
 		} else {
 			throw redirect(302, '/?teamFull');
