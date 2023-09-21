@@ -22,7 +22,7 @@
 			</h1>
 			<h1 class="text-white text-2xl font-light">
 				Phone:
-				<a href="tel:+91-1234567890" class="text-[#0E2954]"> +91-1234567890 </a>
+				<a href="tel:+91-1234567890" class="text-[#0E2954]"> +91-6302504562 </a>
 			</h1>
 		</div>
 	</div>
