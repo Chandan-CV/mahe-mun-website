@@ -25,8 +25,8 @@
 	>
 		<h1 class="md:text-9xl text-5xl text-white font-bold">COMMITEES</h1>
 	</div>
-	<div class="w-full p-10">
-		<section class="text-gray-600 body-font">
+	<div class="w-full">
+		<section class=" bg-[#1F6E8C] text-gray-600 body-font bg-committee-bg bg-fixed bg-contain bg-blend-overlay">
 			<div class="container px-5 py-24 mx-auto">
 				<div class="flex flex-wrap -mx-4 -mb-10 text-center">
 					{#each committeedata as committee}
