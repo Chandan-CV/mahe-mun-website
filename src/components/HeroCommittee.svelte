@@ -4,7 +4,6 @@
 </script>
 <section>
     <div class=" h-[100vh] flex text-white bg-gradient-to-b from-[#040b18] via-[#1F6E8C] to-[#2E8A99]"><!--040b18-->
-       
         <h1 class="title-font Nevis justify-center align-middle flex-col sm:text-9xl text-4xl text-center font-medium text-white-900 flex-1 mt-auto mb-auto">
 			5 COMMITTEES
             <p>300+ DELEGATES</p>

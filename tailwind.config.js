@@ -10,7 +10,8 @@ export default {
 	theme: {
 		extend: {
 			backgroundImage: {
-				'banner-bg': "url('lib/images/firstBG.jpg')"
+				'banner-bg': "url('lib/images/firstBG.jpg')",
+				'committee-bg': "url('https://images.pexels.com/photos/10954065/pexels-photo-10954065.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2')",
 			},
 			animation: {
 				fade: 'fadeOut 5s ease-in-out'
