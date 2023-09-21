@@ -11,7 +11,7 @@
 	let firstName: string = '';
 	let lastName: string = '';
 	//@ts-ignore
-	let userAge: string = null;
+	let userAge: string = '';
 	let numDelegates: string = '';
 	//@ts-ignore
 	let mobileNumber: string = null;
@@ -100,7 +100,7 @@
 			formData.set('additionalQuestions', additionalQuestions);
 			formData.set('numDelegates', numDelegates);
 			formData.set('teamName', teamName);
-			if(showLearnerId){
+			if (showLearnerId) {
 				formData.set('learnerId', manipalLearnerId);
 			}
 		} else {
@@ -118,6 +118,8 @@
 			formErrors['userAgeError'] = [true, 'Enter an integer'];
 		} else if (Number(userAge) <= 17) {
 			formErrors['userAgeError'] = [true, 'Under the age limit for this mun'];
+		} else if (Number(userAge) >= 25) {
+			formErrors['userAgeError'] = [true, 'Above the age limit for this mun'];
 		} else {
 			formErrors['userAgeError'] = [false, ''];
 		}
@@ -282,7 +284,9 @@
 						</g>
 					</svg>
 					<span
-						>Deputy Secretary General <span class="text-sm leading-normal font-extrabold tracking-tight">Eshan:</span>&nbsp;</span
+						>Deputy Secretary General <span
+							class="text-sm leading-normal font-extrabold tracking-tight">Eshan:</span
+						>&nbsp;</span
 					>
 					<span class="text-sm">+93 6302 504 562</span>
 				</div>
@@ -338,7 +342,9 @@
 						</g>
 					</svg>
 					<span
-						>Under-Secretary General (USG) Delegate Affairs <span class="text-sm leading-normal font-extrabold tracking-tight">Aayush</span>:&nbsp;</span
+						>Under-Secretary General (USG) Delegate Affairs <span
+							class="text-sm leading-normal font-extrabold tracking-tight">Aayush</span
+						>:&nbsp;</span
 					>
 					<br />
 					<span class="text-sm">+93 9099 060 271</span>
@@ -395,12 +401,13 @@
 						</g>
 					</svg>
 					<span
-						>Under-Secretary General (USG) Delegate Affairs <span class="text-sm leading-normal font-extrabold tracking-tight">Divya</span>:&nbsp;</span
+						>Under-Secretary General (USG) Delegate Affairs <span
+							class="text-sm leading-normal font-extrabold tracking-tight">Divya</span
+						>:&nbsp;</span
 					>
 					<span class="text-sm">+91 6385 129 850</span>
 				</div>
 			</div>
-
 
 			<div
 				class="w-full p-8 my-4 md:px-12 lg:w-9/12 lg:pl-20 lg:pr-40 mr-auto rounded-2xl shadow-2xl"
@@ -463,7 +470,7 @@
 					<InputField
 						placeholderName="Age"
 						labelName="Age"
-						errorText=" "
+						errorText={formErrors.userAgeError[1].toString()}
 						bind:value={userAge}
 						on:input={validateUserAge}
 					/>
