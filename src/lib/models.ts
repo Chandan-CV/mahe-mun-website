@@ -10,6 +10,7 @@ export type Committee ={
     referenceMaterialUrl:string;
     description: string;
     chairs: Chair[];
+    agenda: string;
 }
 
 export type Chair = {
