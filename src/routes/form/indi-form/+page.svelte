@@ -73,27 +73,31 @@
 				setTimeout(() => {
 					error = false;
 				}, 5000);
+			} else {
+				formData.set('firstName', firstName);
+				formData.set('lastName', lastName);
+				formData.set('userAge', userAge);
+				formData.set('mobileNumber', mobileNumber);
+				formData.set('institutionName', institutionName);
+				//@ts-ignore
+				formData.set('firstPref', firstPref);
+				//@ts-ignore
+				formData.set('secondPref', secondPref);
+				//@ts-ignore
+				formData.set('thirdPref', thirdPref);
+				//@ts-ignore
+				formData.set('firstMunAnswer', firstMunAnswer);
+				//@ts-ignore
+				formData.set('accomodationRequired', accomodationRequired);
+				formData.set('reasonCommitteePref', reasonCommitteePref);
+				formData.set('topPortPref', topPortPref);
+				formData.set('justCountry', justCountry);
+				formData.set('expAsDel', expAsDel);
+				formData.set('additionalQuestions', additionalQuestions);
+				if (showLearnerId) {
+					formData.set('learnerId', manipalLearnerId);
+				}
 			}
-			formData.set('firstName', firstName);
-			formData.set('lastName', lastName);
-			formData.set('userAge', userAge);
-			formData.set('mobileNumber', mobileNumber);
-			formData.set('institutionName', institutionName);
-			//@ts-ignore
-			formData.set('firstPref', firstPref);
-			//@ts-ignore
-			formData.set('secondPref', secondPref);
-			//@ts-ignore
-			formData.set('thirdPref', thirdPref);
-			//@ts-ignore
-			formData.set('firstMunAnswer', firstMunAnswer);
-			//@ts-ignore
-			formData.set('accomodationRequired', accomodationRequired);
-			formData.set('reasonCommitteePref', reasonCommitteePref);
-			formData.set('topPortPref', topPortPref);
-			formData.set('justCountry', justCountry);
-			formData.set('expAsDel', expAsDel);
-			formData.set('additionalQuestions', additionalQuestions);
 		} else {
 			error = true;
 			document.body.scrollIntoView();
@@ -263,7 +267,9 @@
 						</g>
 					</svg>
 					<span
-						>Deputy Secretary General <span class="text-sm leading-normal font-extrabold tracking-tight">Eshan:</span>&nbsp;</span
+						>Deputy Secretary General <span
+							class="text-sm leading-normal font-extrabold tracking-tight">Eshan:</span
+						>&nbsp;</span
 					>
 					<span class="text-sm">+93 6302 504 562</span>
 				</div>
@@ -319,7 +325,9 @@
 						</g>
 					</svg>
 					<span
-						>Under-Secretary General (USG) Delegate Affairs <span class="text-sm leading-normal font-extrabold tracking-tight">Aayush</span>:&nbsp;</span
+						>Under-Secretary General (USG) Delegate Affairs <span
+							class="text-sm leading-normal font-extrabold tracking-tight">Aayush</span
+						>:&nbsp;</span
 					>
 					<br />
 					<span class="text-sm">+93 9099 060 271</span>
@@ -376,7 +384,9 @@
 						</g>
 					</svg>
 					<span
-						>Under-Secretary General (USG) Delegate Affairs <span class="text-sm leading-normal font-extrabold tracking-tight">Divya</span>:&nbsp;</span
+						>Under-Secretary General (USG) Delegate Affairs <span
+							class="text-sm leading-normal font-extrabold tracking-tight">Divya</span
+						>:&nbsp;</span
 					>
 					<span class="text-sm">+91 6385 129 850</span>
 				</div>
@@ -430,7 +440,7 @@
 					<InputField
 						placeholderName="Age"
 						labelName="Age"
-						errorText=" "
+						errorText={formErrors.userAgeError[1].toString()}
 						bind:value={userAge}
 						on:input={validateUserAge}
 					/>

@@ -5,7 +5,7 @@ import { MongoClient } from 'mongodb';
 import { v4 as uuidv4 } from 'uuid';
 
 const ROUND1_INDIVIDUAL_MAHE = 105000;
-const ROUND1_INDIVIDUAL_NON_MAHE = 16500;
+const ROUND1_INDIVIDUAL_NON_MAHE = 165000;
 const ROUND2_INDIVIDUAL = 120000;
 const ROUND3_INDIVIDUAL = 120000;
 
