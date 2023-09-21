@@ -30,13 +30,16 @@
 	import Aboutus from '../components/Aboutus.svelte';
 	import Delegate from '../components/Delegate.svelte';
 	import ContactUs from '../components/ContactUs.svelte';
+	import HeroCommittee from '../components/HeroCommittee.svelte';
 </script>
 
-<body class="bg-gradient-to-b from-[#0E2954] via-[#1F6E8C] to-[#2E8A99]">
+<body class="bg-gradient-to-b from-[#0E2954] via-[#1F6E8C] to-[#2E8A99] overflow-x-hidden">
 	<Navbar userState={data} />
 	<Hero />
+	<HeroCommittee />
 	<Aboutus />
 	<Delegate />
+	<Letter />
 	<ContactUs />
 	<Footer />
 </body>

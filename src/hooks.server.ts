@@ -5,7 +5,7 @@ import * as dotenv from 'dotenv';
 dotenv.config();
 
 export const handle = SvelteKitAuth(
-    //@ts-ignore
+	
 	async (event) => {
 		const authOptions = {
 			providers: [

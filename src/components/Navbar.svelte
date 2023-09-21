@@ -13,20 +13,20 @@
 
 <!-- add ways to show the user on which step of registeration he currently is on -->
 <!-- Filling the form, form filled, payment pending, payment completed, dashboard -->
-<header class="text-white body-font sticky flex justify-center items-center">
+<header class="text-white body-font sticky flex justify-center items-center ">
 	<div class="container flex flex-wrap p-5 flex-col md:flex-row items-center justify-between">
 		<a class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0" href="/">
 			<img src={maheLogo} alt="MAHE-MUN" width="50" height="50" class="brightness-0 invert" />
 		</a>
 		<nav
-			class="flex flex-wrap items-center text-base justify-center md:justify-between md:w-1/2 w-full"
+			class="flex flex-wrap items-center text-base justify-center md:justify-between md:w-1/2 w-full "
 		>
 			<a class="m-2 hover:text-[#84A7A1] cursor-pointer" href="/">Home</a>
 			<a class="m-2 hover:text-[#84A7A1] cursor-pointer" href="/committees">Committees</a>
 			<a class="m-2 hover:text-[#84A7A1] cursor-pointer" href="/team">Team</a>
-			<a class="m-2 hover:text-[#84A7A1] cursor-pointer" href="/generalresources"
+			<!-- <a class="m-2 hover:text-[#84A7A1] cursor-pointer" href="/generalresources"
 				>General Resources</a
-			>
+			> -->
 		</nav>
 		{#if userState.loggedIn}
 			<button
