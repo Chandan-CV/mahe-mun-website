@@ -177,10 +177,22 @@
 									<h5 class="font-bold uppercase text-gray-400">
 										{data.teamMembers[i].user_email}
 									</h5>
-									<h3 class="font-bold text-3xl text-gray-600">
-										{data.teamMembers[i].status.toUpperCase()}
-										<span class="text-green-500"><i class="fas fa-caret-up" /></span>
-									</h3>
+									{#if !data.teamMembers[i].is_team_leader && !data.teamMembers[i].secondary_form_filled}
+										<h3 class="font-bold text-3xl text-gray-600">
+											FORM UNFILLED
+											<span class="text-green-500"><i class="fas fa-caret-up" /></span>
+										</h3>
+									{:else if !data.teamMembers[i].is_team_leader && data.teamMembers[i].secondary_form_filled}
+										<h3 class="font-bold text-3xl text-gray-600">
+											{data.teamMembers[i].status.toUpperCase()}
+											<span class="text-green-500"><i class="fas fa-caret-up" /></span>
+										</h3>
+									{:else if data.teamMembers[i].is_team_leader}
+										<h3 class="font-bold text-3xl text-gray-600">
+											{data.teamMembers[i].status.toUpperCase()}
+											<span class="text-green-500"><i class="fas fa-caret-up" /></span>
+										</h3>
+									{/if}
 								</div>
 								{#if data.userInfo.is_team_leader}
 									{#if data.teamMembers[i].is_team_leader != true}

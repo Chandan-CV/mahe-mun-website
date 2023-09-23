@@ -47,6 +47,9 @@ export const load = async (event) => {
 			console.log('going to home');
 			throw redirect(302, '/');
 		}
+		if (!userFound['secondary_form_filled']) {
+			throw redirect(302, '/');
+		}
 		const teamFound = await munTeams.findOne(
 			{ team_ref_id: userFound['team_ref_id'] },
 			projectionType
