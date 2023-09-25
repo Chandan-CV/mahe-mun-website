@@ -113,6 +113,8 @@
 			formErrors['userAgeError'] = [true, 'Enter an integer'];
 		} else if (Number(userAge) <= 17) {
 			formErrors['userAgeError'] = [true, 'Under the age limit for this mun'];
+		} else if (Number(userAge) >= 25) {
+			formErrors['userAgeError'] = [true, 'Above the age limit for this mun'];
 		} else {
 			formErrors['userAgeError'] = [false, ''];
 		}

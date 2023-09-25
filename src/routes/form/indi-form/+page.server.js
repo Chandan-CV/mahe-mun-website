@@ -50,6 +50,7 @@ export const actions = {
 			//@ts-ignore
 			const actualData = formData[symbolKey];
 			if (typeof actualData[15] != 'undefined') {
+				let amountToPay = CURRENT_PRICE_MAHE;
 				// console.log(actualData);
 				munUserInfo.insertOne({
 					user_email: session.user.email,
@@ -70,12 +71,13 @@ export const actions = {
 					exp_as_del: actualData[13]['value'],
 					additional_questions: actualData[14]['value'],
 					mahe_learner_id: actualData[15]['value'],
+					amount_to_pay: amountToPay,
 					status: 'unconfirmed'
 				});
 				// understand how fees work
 				// if team payment add the following fields
 				// team_name, pass_type -> Team, invite_code, team_capacity, current_capacity
-				let amountToPay = CURRENT_PRICE_MAHE;
+				
 				munUserPayment.insertOne({
 					user_name: session.user.name,
 					user_email: session.user.email,
@@ -87,6 +89,7 @@ export const actions = {
 				});
 				throw redirect(302, `/payment`);
 			} else {
+				let amountToPay = CURRENT_PRICE_NON_MAHE;
 				munUserInfo.insertOne({
 					user_email: session.user.email,
 					reg_type: 'individual',
@@ -105,13 +108,13 @@ export const actions = {
 					just_countery: actualData[12]['value'],
 					exp_as_del: actualData[13]['value'],
 					additional_questions: actualData[14]['value'],
-
+					amount_to_pay: amountToPay,
 					status: 'unconfirmed'
 				});
 				// understand how fees work
 				// if team payment add the following fields
 				// team_name, pass_type -> Team, invite_code, team_capacity, current_capacity
-				let amountToPay = CURRENT_PRICE_NON_MAHE;
+				
 				munUserPayment.insertOne({
 					user_name: session.user.name,
 					user_email: session.user.email,

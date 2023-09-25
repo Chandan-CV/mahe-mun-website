@@ -324,16 +324,26 @@
 						on:input={validateMobileNumber}
 					/>
 				</div>
-				<div class="my-2 w-1/2 lg:w-1/4">
+				<div class="my-2 w-2/2 lg:w-2/4 inline-flex space-x-10">
 					<button
 						class="uppercase text-sm font-bold tracking-wide bg-blue-900 text-gray-100 p-3 rounded-lg w-full
                   focus:outline-none focus:shadow-outline"
 					>
 						Submit
 					</button>
+					<button formaction="?/reverseJoinProcess" type="submit"
+						class="uppercase text-sm font-bold tracking-wide bg-blue-900 text-gray-100 p-3 rounded-lg w-full
+				  focus:outline-none focus:shadow-outline"
+					>
+						Abort
+					</button>
 				</div>
+				<!-- <div class="my-2 w-1/2 lg:w-1/4">
+					
+				</div> -->
 			</div>
 		</div>
 	</form>
+	
 	<Footer /></body
 >

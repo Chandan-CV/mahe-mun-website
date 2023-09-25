@@ -62,6 +62,7 @@ export const actions = {
 			//@ts-ignore
 			const actualData = formData[symbolKey];
 			if (typeof actualData[17] == 'undefined') {
+				let amountToPay = CURRENT_PRICE_NON_MAHE * Number(actualData[15]['value']);
 				munUserInfo.insertOne({
 					user_email: session.user.email,
 					reg_type: 'team',
@@ -82,6 +83,7 @@ export const actions = {
 					additional_questions: actualData[14]['value'],
 					team_ref_id: teamRefId,
 					is_team_leader: true,
+					amount_to_pay: amountToPay,
 					status: 'unconfirmed'
 				});
 				////////////////////////////////////////////////////converting to integer
@@ -99,7 +101,7 @@ export const actions = {
 				// if team payment add the following fields
 				// team_name, pass_type -> Team, invite_code, team_capacity, current_capacity
 				//////////////////////////////////////////////////////converting to integer
-				let amountToPay = CURRENT_PRICE_NON_MAHE * Number(actualData[15]['value']);
+				
 				munUserPayment.insertOne({
 					user_name: session.user.name,
 					user_email: session.user.email,
@@ -111,6 +113,7 @@ export const actions = {
 				});
 				throw redirect(302, `/payment`);
 			} else {
+				let amountToPay = CURRENT_PRICE_MAHE * Number(actualData[15]['value']);
 				munUserInfo.insertOne({
 					user_email: session.user.email,
 					reg_type: 'team',
@@ -132,6 +135,7 @@ export const actions = {
 					mahe_learner_id: actualData[17]['value'],
 					team_ref_id: teamRefId,
 					is_team_leader: true,
+					amount_to_pay: amountToPay,
 					status: 'unconfirmed'
 				});
 				////////////////////////////////////////////////////converting to integer
@@ -149,7 +153,7 @@ export const actions = {
 				// if team payment add the following fields
 				// team_name, pass_type -> Team, invite_code, team_capacity, current_capacity
 				//////////////////////////////////////////////////////converting to integer
-				let amountToPay = CURRENT_PRICE_MAHE * Number(actualData[15]['value']);
+				
 				munUserPayment.insertOne({
 					user_name: session.user.name,
 					user_email: session.user.email,

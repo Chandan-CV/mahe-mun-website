@@ -558,7 +558,7 @@
 						<label
 							for="helper-text"
 							class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-							>Committee Preference*</label
+							>Is This Your First MUN?*</label
 						>
 						<select
 							name=""

@@ -158,5 +158,28 @@ export const actions = {
 				throw redirect(302, '/dashboard');
 			}
 		}
+	},
+
+	reverseJoinProcess: async (event) => {
+		const session = await event.locals.getSession();
+		if (!session?.user) {
+			throw redirect(302, '/');
+		}
+		// console.log("something");
+		let foundUser = await munUserInfo.findOne({ user_email: session.user.email, reg_type: 'team' });
+		if (foundUser != null) {
+			let foundTeam = await munTeams.findOne({ team_ref_id: foundUser['team_ref_id'] });
+			if (foundTeam != null) {
+				//@ts-ignore
+				let newCapacity = foundTeam['current_capacity'] - 1;
+				console.log(foundTeam['current_capacity']);
+				await munTeams.updateOne(
+					{ team_ref_id: foundUser['team_ref_id'] },
+					{ $set: { current_capacity: newCapacity } }
+				);
+				await munUserInfo.deleteOne({ user_email: session.user.email, reg_type: 'team' });
+				throw redirect(302, '/form');
+			}
+		}
 	}
 };
